@@ -1,0 +1,456 @@
+@font-face {
+    font-family: 'Vietnam';
+    src: url('/chatt/public/css/fonts/BeVietnamPro-ExtraLight.ttf');
+}
+@font-face {
+    font-family: 'Vietnam';
+    src: url('./fonts/BeVietnamPro-ExtraLight.ttf');
+}
+*{
+    font-family: 'Vietnam';
+  }
+
+html ::-webkit-scrollbar {
+
+    width: 10px;
+  }
+  
+  html ::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background: #8224AE;
+  }
+
+  html ::-webkit-scrollbar-track {
+    background: #121212;
+  }
+
+
+
+#chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 840px;
+    height: 70vh;
+    background-color: #151515 ;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 30px;
+    font-family: 'Vietnam';
+}
+
+#name-container {
+    padding: 10px;
+    background-color: #282a34;
+    font-family: 'Vietnam';
+}
+
+#nameInput {
+    display: none;
+    font-family: 'Vietnam';
+}
+
+#messages {
+    list-style-type: none;
+    padding: 20px;
+    font-family: 'Vietnam';
+    margin: 0;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #282a34;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#messages li {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #212121;
+    color: #9F9F9F;
+    max-width: 70%;
+    word-wrap: break-word;
+    font-size: 16px;
+    margin-left: 35px;
+}
+
+#chat-form {
+    display: flex;
+    padding: 10px;
+    background-color: #282a34;
+}
+
+#input {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    flex: 1;
+    background-color: #2f3136;
+    color: #9F9F9F;
+    font-size: 16px;
+}
+
+#chat-form button {
+    position: absolute;
+    background-color: #2f3136;
+    border: none;
+    top: 669px;
+    width: 48px;
+    height: 42px;
+    left: 1128px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    text-transform: uppercase;
+}
+
+#chat-form button:hover {
+    background-color: #8224AE;
+}
+#nameInput {
+    width: 96%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    color: #0066ff;
+    font-size: 16px;
+    flex: 1;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Animação suave */
+}
+
+#nameInput:focus {
+    background-color: #2f3136; /* Mantém o fundo escuro ao clicar */
+    color: #b9bbbe; /* Texto cinza claro para melhor contraste */
+    border: 2px solid #5865f2; /* Borda azul ao clicar */
+    outline: none; /* Remove o contorno padrão */
+}
+#notification {
+    font-size: 12px; /* Diminui a fonte da mensagem de atenção */
+    color: #ff0000; /* Cor vermelha para bronca */
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+#timer {
+    font-size: 14px; /* Fonte do timer */
+    color: #aaa; /* Cor cinza para o timer */
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+
+
+
+
+input[type="checkbox"]{
+    display:none;
+    margin-top: 20px;
+}
+
+input[type="checkbox"]:checked ~ nav{
+    transform: translateX(300px);
+}
+
+input[type="checkbox"]:checked ~ label>img{
+    transform: translateX(250px);
+
+}
+
+label>img{
+  width: 40px;  
+  position: absolute;
+  transition: all 0.5s;
+  margin-top: 25px;
+  margin-left: 0px;
+  z-index: 5;
+}
+
+.nav-vertical{
+    background-color: rgb(31, 31, 31);
+    width:300px;  
+    height: 100%; 
+    position: absolute;  
+    left: -300px;
+    transition: all 0.5s;
+    z-index: 4;
+}
+
+.nav-vertical>ul{
+    position: relative;
+    top:70px ;
+    list-style: none;
+    
+}
+
+.nav-vertical>ul>li>a{
+    display: block;
+    padding:10 20;
+    color:#FFF;
+    text-decoration: none;
+    font-family: sans-serif;
+    margin-bottom: 15px;
+}
+
+.nav-vertical>ul>li>a:hover{
+    background-color: rgb(18, 18, 18);
+    color:#8224AE;
+}
+.logo{
+    width:200px;
+    height: 100px;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+.img-logo{
+    width:100%
+}
+.linha{
+    width: 100%;
+    height: 1px;
+    background-color: #8B8B8B;
+    margin-top: 380px;
+}
+.account{
+    display: flex;
+}
+.perfil{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin-top: 10px;
+    margin-left: 25px;
+}
+.account span{
+    color: #FFF;
+    margin-top: 30px;
+    margin-left: 10px;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+.header{
+    display: flex;
+    width: 100%;
+    height: 100px;
+    border-bottom: 1.5px solid #383838;
+    background-color:#22252D ;
+    z-index: 3;
+}
+.logo-principal{
+    width: 12.5%;
+    margin-top: 5px;
+    margin-left: 50px;
+}
+.img-principal{
+    width:100%;
+}
+.lado-direito{
+    float: right;
+    width: 83%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+} 
+.conteudo-header{
+    margin-right: 20px;
+    display: flex;
+    column-gap: 50px;
+    font-family: sans-serif;
+}
+.search{
+    width: 300px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3b3e4f;
+}
+.link{
+    text-decoration: none;
+    color: #8224AE;
+    font-weight: bold;
+    font-family: "Fredoka";
+}
+
+
+
+body,
+html,
+main,
+figure,
+section,
+a,
+img,
+div,
+p,
+h1 {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+body{
+    background-color: #2d2f3b;
+}
+
+/* linha lyaout */
+.info-comunidade{
+    width: 300px;
+    height: 550px;
+    background-color: #282a34;
+    border-radius: 10px;
+}
+.box-infoCom{
+    display: flex;
+
+}
+.box-linha{
+    height: 80px;
+    width: 100%;
+
+    display: flex;
+}
+.linhahe{
+    width: 40%;
+    height: 1px;
+    margin-top: 50px;
+    background-color: #8224AE;
+}
+.textlinha{
+    font-size: 20px;
+    margin-top: 40px;
+    padding: 0px 60px 30px 60px;
+    color: #8224AE;
+    font-family: "Fredoka";
+}
+.textlinhamu{
+    font-size: 20px;
+    margin-top: 40px;
+    padding: 0px 50px 30px 50px;
+    color: #8224AE;
+    font-family: "Fredoka";
+}
+.textchat{
+    position: absolute;
+    margin-left: 350px;
+    font-size: 20px;
+    color: #8224AE;
+    z-index: 2;
+}
+.aviao{
+    width: 30px;
+    height: 30px;
+}
+.enviar{
+    width: 40px;
+    background-color: #8224AE;
+    height: 40px;
+}
+.profile-pic{
+    border-radius: 50%;
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+}
+.namechat span{
+    margin-left: 50px;
+
+
+
+}
+.namechat{
+    margin-top: -45px;
+}
+.boxge{
+    display:row;
+    width: 90%;
+
+
+}
+.mensagenl{
+    display: block;
+    margin-left: 50px;
+    margin-top: 5px;
+    width: 100%;
+}
+.nome{
+    color: #8224AE;
+}
+
+
+/* fim aqui meio */
+
+
+
+
+
+
+.box-info{
+    background-color: #282a34;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    height: 530px;
+    border-radius: 10px;
+    margin-top: 20px;
+
+}
+.info{
+        margin-top: 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+}
+.link-postagens>i{
+    margin-left: 14%;
+    font-weight: bold;
+    margin-right: 5px;
+}
+.link-postagens{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #939393;
+    font-family: "Vietnam";
+    font-weight: bold;
+}
+.linha{
+    width: 100%;
+    height: 1px;
+    background-color: #8B8B8B;
+    margin-top: 380px;
+}
+.sub-comunidade select {
+    margin-top: 40px;
+    width: 210px;
+    background: none;
+    color: #646464;
+    border: none;   
+    border-radius: 2px;
+    padding: 9px 9px;
+    background-color: #282a34;
+    font-family: "Vietnam";
+    font-size: 17px;
+    font-weight: bold;
+}
+.box-info2{
+    background-color: #282a34;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    margin-top: 20px;
+    bottom: 0;
+    right: 0;
+    height: 530px;
+}

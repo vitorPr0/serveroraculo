@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> 
+</head>
+<body>
+    <header class="header">
+        <input type="checkbox" id="chec" />
+        <label for="chec" class="box-chec">
+            <img src="img/menu vertical.png" >
+        </label>
+        <nav class="nav-vertical">
+            <figure class="logo">
+                <img src="img/logo3.png" alt="logo" class="img-logo">
+            </figure>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="chatt/public/chatlivro.html">Comunidade de Livros</a>
+                <li><a href="chatt/public/chatmusica.html">Comunidade de Músicas</a>
+                <li><a href="chatt/public/chatjogos.html">Comunidade de Jogos</a>
+                <li><a href="chatt/public/chatcinema.html">Comunidade de Cinema</a>
+                <li><a href="chatt/public/chatmariafifi.html">Comunidade Maria fifi</a>
+                <li><a href="../../suporte.html">Suporte</a></li>
+                <li><a href="../../teladenuncias.html">Reportar</a></li>
+                <li><a href="../../login.html">Sair</a></li>
+            </ul>
+            <div class="linha"></div>
+            <section class="account">
+                <div class="box-perfil">
+                    <img id="profilePic"  class="perfil">
+                </div>
+                <span id="userDisplayName"></span>
+            </section>
+        </nav>
+        <div class="logo-principal">
+            <img src="./img/meialogo.png" alt="" class="img-principal">
+        </div>
+        <section class="lado-direito">
+            <div class="conteudo-header">
+                <input type="text" placeholder="Pesquise aqui" class="search">
+
+            </div>
+        </section>
+    </header>
+
+    <div class="box-linha">
+        <div class="linhahe"></div>
+        <span class="textlinhamu">Comunidade de Musica</span>
+        <div class="linhahe"></div>
+    </div>
+    <section class="box-infoCom">
+        <section class="box-info">
+            <div class="info">
+                <a href="/postagemmusica.html" class="link-postagens"><i class="bi bi-send"></i> Postagens</a>
+                <a href="/maisComentadosMusicas.html" class="link-postagens"><i class="bi bi-chat-text"></i> Músicas mais comentadas</a>
+                <a href="" class="link-postagens"><i class="bi bi-camera-reels  "></i> Gravadoras</a>
+                <a href="/generomusicas.html" class="link-postagens"><i class="bi bi-journal-text"></i> Gêneros</a>
+                <a href="/eventosmusica.html" class="link-postagens"><i class="bi bi-calendar2-date"></i> Eventos</a>
+                <a href="/novidadesMusica.html" class="link-postagens"><i class="bi bi-globe"></i> Novidades</a>
+                <a href="/regras.html" class="link-postagens"><i class="bi bi-rulers"></i> Regras</a>
+                <a href="/teladenuncias.html" class="link-postagens"><i class="bi bi-ban"></i> Denúncias</a>
+                <a href="/snmusicas.html" class="link-postagens"><i class="bi bi-info-circle"></i> Sobre essa comunidade</a>                </div>
+        </section>
+        <div style="width: 50px;">
+
+        </div>
+        <span class="textchat">Chat</span>
+            <div id="chat-container">
+
+                <div id="name-container">
+                    <input id="nameInput" required readonly>
+                    
+                </div>
+
+                    <ul id="messages"></ul>
+
+
+                <div id="notification" style="display: none; margin: 10px 0;"></div>
+                <div id="timer" style="display: none; margin-bottom: 10px; font-size: 14px; color: #aaa;"></div>
+        
+                <form id="chat-form">
+                    <input id="input" type="text" autocomplete="off" placeholder="Digite uma mensagem...">
+                    <button type="submit " class="enviar"><img class="aviao" src="./img/aviao.png" alt=""></button>
+                </form>
+            </div>
+            <div style="width: 50px;">
+
+            </div>
+            <section class="box-info2">
+                <nav class="sub-comunidade">
+                    <select class="sub-comunidade"name="" id="">
+                        <option value="pt">Sub-Comunidades</option>
+                        <option value="pt">Trono de Vidro</option>
+                        <option value="pt">Povo do Ar</option>
+                        <option value="pt">ACOTAR</option>
+                        <option value="pt">De Sangue e Cinzas</option>
+                        <option value="pt">Estilhaça-me</option>
+                        <option value="pt">Percy Jackson</option>
+                        <option value="pt">Harry Potter</option>
+                        <option value="pt">Anne Whit E</option>
+                        <option value="pt">Bridgerton</option>
+                        <option value="pt">A Maldição do Tigre</option>
+                        <option value="pt">Jogos Vorazes</option>
+                        <option value="pt">Tudo Pelo Jogo</option>
+                        <option value="pt">Sombra e Ossos</option>
+                        <option value="pt">Cidade da Lua Crescente</option>
+                        <option value="pt">Senhor dos Anéis</option>
+                        <option value="pt">Castelo Animado</option>
+                        <option value="pt">Caraval</option>
+                        <option value="pt">EUVUCP</option>
+                    </select>
+                </nav>
+            </section>
+
+    </section>
+
+
+
+    <!-- Importando o Socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const inputField = document.querySelector('#input');
+        const messagesList = document.querySelector('#messages');
+        const nameInput = document.querySelector('#nameInput');
+
+        const bannedWords = [
+            'idiota', 
+            'estúpido', 
+            'merda', 
+            'caralho', 
+            'puto', 
+            'safado', 
+            'bosta', 
+            'vagabundo', 
+            'babaca', 
+            'filho da puta', 
+            'cuzão', 
+            'porra', 
+            'safada', 
+            'putaria', 
+            'desgraçado', 
+            'desgraçada', 
+            'otário', 
+            'cabrão', 
+            'canalha', 
+            'fresco', 
+            'piranha', 
+            'meretriz', 
+            'vagabunda', 
+            'carniça', 
+            'safadinha', 
+            'cuzinha', 
+            'pavão', 
+            'pilantra', 
+            'viadinho', 
+            'viado', 
+            'bichinha', 
+            'viadagem', 
+            'filipe',
+            'maconheiro', 
+            'drogado', 
+            'crackudo', 
+            'bêbado', 
+            'chato', 
+            'fanfarrão', 
+            'cabeça de vento', 
+            'lixo', 
+            'incapaz', 
+            'infeliz', 
+            'futuro ladrão', 
+            'cabeça de bagre', 
+            'bicho', 
+            'velho', 
+            'bicho do mato',
+            'futebol de várzea', 
+            'cachorrão', 
+            'escroto', 
+            'arrombado', 
+            'carniçona', 
+            'trouxa', 
+            'desgraçadinha', 
+            'merda molhada', 
+            'favelado', 
+            'moleque', 
+            'negão', 
+            'veado', 
+            'putinha', 
+            'carai', 
+            'piranha', 
+            'sem vergonha', 
+            'maricona', 
+            'cuzão',
+            'porra louca', 
+            'broto', 
+            'imbecil', 
+            'burro', 
+            'merda seca',
+            'vaca', 
+            'vadia', 
+            'filha da puta', 
+            'cuzinheira',
+            'fudido', 
+            'fudeu', 
+            'filha da mãe', 
+            'cabrito',
+            'pinto', 
+            'puto', 
+            'piscina de sangue',
+            'puta',
+            'seu macaco',
+            'cu',
+            'quenga',
+            'leitão'
+        ];
+
+        
+
+
+        // Puxa o nome de usuário do localStorage
+        const username = localStorage.getItem('username') || 'Anônimo';
+        const profilePic = localStorage.getItem('profilePic') || '';     // Pega a imagem de perfil do localStorage (se houver)
+        nameInput.value = username; // Define o valor do campo de nome como o nome armazenado
+
+        // Função para carregar mensagens salvas do localStorage
+        function loadMessages() 
+        {
+        const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+        savedMessages.forEach(({ name, message, profilePic }) => {
+        const item = document.createElement('li');
+        const profileImage = profilePic ? `<img src="${profilePic}" alt="profile" class="profile-pic" >` : `<img src="" alt="profile" class="profile-pic" >`;
+        item.innerHTML = ` <div class="boxge">
+                                <div>${profileImage}</div>
+                                <div class="namechat">
+                                    <span class="nome">${name}</span>
+                                    <div class="mensagenl">${message}</div>
+                                </div>
+                            </div>`;
+        messagesList.appendChild(item);
+        });
+        window.scrollTo(0, document.body.scrollHeight);
+
+        
+        }
+        document.getElementById('userDisplayName').textContent = username;
+        // Função para salvar uma nova mensagem no localStorage
+        function saveMessage(name, message, profilePic) {
+        const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+        savedMessages.push({ name, message, profilePic });
+        localStorage.setItem('chatMessages', JSON.stringify(savedMessages));
+        }
+
+        // Carrega as mensagens salvas ao abrir a página
+        loadMessages();
+
+        document.querySelector('#chat-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const message = inputField.value;
+        const name = nameInput.value; // Usa o nome armazenado
+
+        // Verifica se a mensagem está vazia
+        if (!message) return;
+
+        // Função para censurar palavras ofensivas
+        const censorMessage = (msg) => {
+            let foundBannedWord = false; // Flag para verificar se foi encontrada uma palavra ofensiva
+            bannedWords.forEach(bannedWord => {
+                const regex = new RegExp(`\\b${bannedWord}\\b`, 'gi'); // regex para encontrar a palavra
+                if (regex.test(msg)) foundBannedWord = true; // Marca se uma palavra proibida foi encontrada
+                msg = msg.replace(regex, '*'.repeat(bannedWord.length)); // substitui pelos asteriscos
+            });
+            return { censored: msg, foundBannedWord }; // Retorna mensagem censurada e se encontrou palavra ofensiva
+        };
+
+            // Censura a mensagem antes de enviá-la
+            const { censored, foundBannedWord } = censorMessage(message);
+
+
+            // Envia a mensagem, nome e imagem de perfil para o servidor
+            socket.emit('chat message', { name, message: censored, profilePic });
+
+            // Limpa o campo de entrada
+            inputField.value = '';
+
+            // Exibe a notificação se palavras ofensivas foram encontradas
+            const notification = document.getElementById('notification');
+            const timerDisplay = document.getElementById('timer');
+
+            if (foundBannedWord) {
+                notification.textContent = 'Atenção: sua mensagem continha palavras ofensivas e foi censurada! Você está bloqueado por 1 minuto.';
+                notification.style.color = '#ff0000'; // Vermelho para bronca
+                notification.style.display = 'block';
+
+                // Desabilita o botão de envio
+                const sendButton = document.querySelector('#chat-form button');
+                sendButton.disabled = true; // Desabilita o botão
+
+                // Inicia o timer de 1 minuto
+                let timeLeft = 60; // Tempo em segundos
+                timerDisplay.textContent = `Tempo restante: ${timeLeft}s`;
+                timerDisplay.style.display = 'block';
+
+                const countdown = setInterval(() => {
+                    timeLeft--;
+                    timerDisplay.textContent = `Tempo restante: ${timeLeft}s`;
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown); // Para o timer quando chega a 0
+                        sendButton.disabled = false; // Habilita novamente o botão
+                        notification.style.display = 'none'; // Oculta a notificação após o desbloqueio
+                        timerDisplay.style.display = 'none'; // Oculta o timer
+                    }
+                }, 1000); // Atualiza a cada segundo
+            } else {
+                notification.style.display = 'none'; // Oculta a notificação se não houver palavras ofensivas
+            }
+
+            // Oculta a notificação após 10 segundos
+            setTimeout(() => {
+                notification.style.display = 'none'; // Oculta a notificação após 10 segundos
+            }, 10000); // 10000 ms = 10 segundos
+
+            // Oculta a notificação após 3 segundos (apenas se não houve bloqueio)
+            setTimeout(() => {
+                if (!foundBannedWord) {
+                    notification.style.display = 'none';
+                }
+            }, 8000); // 3000 ms = 3 segundos
+        });
+        function scrollToBottom() {
+        const messagesList = document.getElementById('messages');
+        messagesList.scrollTop = messagesList.scrollHeight; // Define o scroll para o final da lista
+            }
+        // Receber mensagem
+        socket.on('chat message', (data) => {
+        const item = document.createElement('li');
+        item.classList.add('li-chat');
+        const profileImage = data.profilePic ? `<img src="${data.profilePic}" alt="profile" class="profile-pic">` : '';
+        item.innerHTML = ` <div class="boxge">
+                                <div>${profileImage}</div>
+                                <div class="namechat">
+                                    <span class="nome">${data.name}</span>
+                                    <div class="mensagenl">${data.message}</div>
+                                </div>
+                            </div>`;
+        messagesList.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+
+            // Salva a mensagem recebida no localStorage
+            saveMessage(data.name, data.message, data.profilePic);
+        });
+    </script>
+</body>
+</html>

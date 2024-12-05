@@ -1,0 +1,154 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo */
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #FF5F6D, #FFC371);
+    overflow: hidden;
+}
+
+/* Fundo animado */
+body::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.25), rgba(255,255,255,0));
+    z-index: 0;
+    animation: glow 6s infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        transform: translateX(0px) translateY(0px);
+    }
+    100% {
+        transform: translateX(-300px) translateY(-300px);
+    }
+}
+
+/* Container do formulário */
+.container {
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    color: #fff;
+}
+
+/* Título */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    color: #fff;
+    text-align: center;
+}
+
+/* Grupo de inputs */
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Labels */
+label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-size: 16px;
+    color: #fff;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+/* Placeholder estilizado */
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Foco no campo */
+input:focus {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Botão */
+.btn {
+    background: linear-gradient(135deg, #ff6b6b, #ffc371);
+    border: none;
+    color: white;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+}
+
+/* Hover do botão */
+.btn:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #ff7a7a, #ffd3a1);
+}
+
+/* Animação ao clicar no botão */
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Link para login */
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #ffdde1;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+    color: #fff;
+}
+
+/* Responsividade */
+@media (max-width: 400px) {
+    .container {
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+}
